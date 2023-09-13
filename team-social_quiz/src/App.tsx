@@ -1,12 +1,18 @@
 import React from 'react';
 import './App.css';
-import SignUp from './signup/RegistrationForm';
+import RegistrationForm from './signup/RegistrationForm';
 
 function App() {
   return (
-    <div className="App">
-      <SignUp/>
-    </div>
+  
+     
+      <div className="App">
+      <RegistrationForm/> 
+    
+      </div>
+      
+ 
+  
   );
 }
 

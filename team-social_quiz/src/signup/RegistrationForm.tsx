@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Signup.css'
 
+
+
 interface FormData {
   username: string;
   fullName: string;
@@ -15,6 +17,7 @@ password: '',
 
 const RegistrationForm: React.FC = () => {
 
+
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,15 +28,22 @@ const RegistrationForm: React.FC = () => {
     }));
   };
 
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
-
+     // Redirect to the dashboard page after successful registration
+  
 
   };
 
   return (
+
+  
     <div>
+    
+    
+
       <h2>Registration Form</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -70,8 +80,10 @@ const RegistrationForm: React.FC = () => {
             required
           />
         </div>
-    
+       
         <button type="submit">Register</button>
+    
+        
       </form>
     </div>
   );

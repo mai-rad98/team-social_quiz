@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import './Signup.css'
-
-
+import './Signup.css';
+import {useNavigate} from 'react-router-dom'
 
 interface FormData {
   username: string;
@@ -9,16 +8,19 @@ interface FormData {
   password: string;
 }
 
+
 const initialFormData: FormData = {
-username: '',
-fullName: '',
-password: '',
+  username: '',
+  fullName: '',
+  password: '',
 };
 
 const RegistrationForm: React.FC = () => {
-
-
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [isRegistering, setIsRegistering] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const navigate =useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,24 +30,76 @@ const RegistrationForm: React.FC = () => {
     }));
   };
 
+ 
+
+  const handleLogin = () => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const storedData: FormData = JSON.parse(storedUser);
+      if (
+        storedData.username === formData.username &&
+        storedData.password === formData.password
+      ) {
+        setIsLoggedIn(true);
+      } else {
+        alert('Invalid username or password');
+      }
+    } else {
+      alert('User not found. Please register first.');
+    }
+  };
+  const handleRegistration = () => {
+    // Store user data in local storage or send it to your server
+    localStorage.setItem('user', JSON.stringify(formData));
+    setIsLoggedIn(true);
+    
+    handleLogin();
+   // Redirect to the dashboard page
+  navigate('/dashboard');
+
+  };
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setIsLoggedIn(false);
+    setFormData(initialFormData);
+    navigate('/');
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted with data:', formData);
-     // Redirect to the dashboard page after successful registration
   
-
+    if (isLoggedIn) {
+      // If the user is logged in, handle logout
+      handleLogout();
+    } else if (isRegistering) {
+      // If on registration form, attempt registration
+      handleRegistration();
+    } else {
+      // If on login form, attempt login
+      handleLogin();
+    }
+  
+    console.log('Form submitted with data:', formData);
+    // Redirect to the dashboard page after successful registration, login, or logout
   };
 
   return (
-
-  
-    <div>
-    
-    
-
-      <h2>Registration Form</h2>
+    <div className="container">
+      <h2>{isLoggedIn ? 'Logged In' : isRegistering ? 'Registration' : 'Login'}</h2>
       <form onSubmit={handleSubmit}>
+        {isRegistering && (
+          <div>
+            <label htmlFor="fullName">Full Name:</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        )}
         <div>
           <label htmlFor="username">User Name:</label>
           <input
@@ -58,18 +112,6 @@ const RegistrationForm: React.FC = () => {
           />
         </div>
         <div>
-  <label htmlFor="fullName">Full Name:</label>
-  <input
-    type="text"
-    id="fullName"
-    name="fullName"
-    value={formData.fullName}
-    onChange={handleChange}
-    required
-  />
-</div>
-        
-        <div>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -80,10 +122,14 @@ const RegistrationForm: React.FC = () => {
             required
           />
         </div>
-       
-        <button type="submit">Register</button>
-    
-        
+        <button type="submit">
+          {isLoggedIn ? 'Logout' : isRegistering ? 'Register' : 'Login'}
+        </button>
+        <button type="button" onClick={() => setIsRegistering(!isRegistering)}>
+          {isRegistering ? 'Switch to Login' : 'Switch to Registration'}
+        </button>
+
+
       </form>
     </div>
   );

@@ -6,9 +6,9 @@ import quizData from '../quiz/quizData';
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <h2>Dashboard</h2>
-      {/*  dashboard content */}
-      <Quiz questions={quizData} />
+      <h2>Welcome, !</h2>
+      <Quiz/>
+      <button >Logout</button>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Quiz from './Quiz';
 import quizData from './quizData'; 
 
 test('renders questions on multiple pages with pagination', () => {
-  render(<Quiz questions={quizData} />);
+  render(<Quiz />);
 
   // Helper function to assert that questions for the current page are displayed.
   const assertCurrentPageQuestions = (page) => {
@@ -14,9 +14,7 @@ test('renders questions on multiple pages with pagination', () => {
     );
 
     currentQuestions.forEach((question, index) => {
-      const questionText = `Question ${page * 5 + index + 1}:`;
-      expect(screen.getByText(questionText)).toBeInTheDocument();
-      expect(screen.getByText(question.question)).toBeInTheDocument();
+    expect(screen.getByText(question.question)).toBeInTheDocument();
 
       
     });

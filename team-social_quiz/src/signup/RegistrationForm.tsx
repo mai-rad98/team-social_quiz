@@ -46,11 +46,7 @@ const RegistrationForm: React.FC = () => {
   const handleRegistration = () => {
     // Store user data in local storage or send it to your server
     localStorage.setItem('user', JSON.stringify(formData));
-    //setIsLoggedIn(true);
 
-    //handleLogin();
-    // Redirect to the dashboard page
-    //navigate('/dashboard');
     alert('Registration successful. You can now log in.');
     setFormData(initialFormData);
     setIsRegistering(false);
@@ -74,10 +70,9 @@ const RegistrationForm: React.FC = () => {
     } else {
       // If on login form, attempt login
       handleLogin();
-      //navigate('/dashboard');
+
       // Redirect to the dashboard page after successful login
       if (isLoggedIn) {
-        //navigate('/dashboard');
       }
     }
 

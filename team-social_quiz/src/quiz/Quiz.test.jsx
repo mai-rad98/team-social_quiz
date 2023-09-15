@@ -10,7 +10,7 @@ test('renders questions on multiple pages with pagination', () => {
   const assertCurrentPageQuestions = (page) => {
     const currentQuestions = quizData.slice(page * 5, (page + 1) * 5);
 
-    currentQuestions.forEach((question, index) => {
+    currentQuestions.forEach((question) => {
       expect(screen.getByText(question.question)).toBeInTheDocument();
     });
   };

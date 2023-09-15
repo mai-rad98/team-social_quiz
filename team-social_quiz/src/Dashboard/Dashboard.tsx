@@ -1,14 +1,21 @@
 import React from 'react';
 import Quiz from '../quiz/Quiz';
-import quizData from '../quiz/quizData';
-
+import { useNavigate } from 'react-router-dom';
+import './Dash.css';
 
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/');
+  };
   return (
     <div>
       <h2>Welcome, !</h2>
-      <Quiz/>
-      <button >Logout</button>
+      <Quiz />
+      <button className="log-out" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 };

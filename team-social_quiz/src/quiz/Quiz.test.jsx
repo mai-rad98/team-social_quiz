@@ -1,22 +1,17 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Quiz from './Quiz';
-import quizData from './quizData'; 
+import quizData from './quizData';
 
 test('renders questions on multiple pages with pagination', () => {
   render(<Quiz />);
 
   // Helper function to assert that questions for the current page are displayed.
   const assertCurrentPageQuestions = (page) => {
-    const currentQuestions = quizData.slice(
-      page * 5,
-      (page + 1) * 5
-    );
+    const currentQuestions = quizData.slice(page * 5, (page + 1) * 5);
 
     currentQuestions.forEach((question, index) => {
-    expect(screen.getByText(question.question)).toBeInTheDocument();
-
-      
+      expect(screen.getByText(question.question)).toBeInTheDocument();
     });
   };
 
@@ -29,24 +24,4 @@ test('renders questions on multiple pages with pagination', () => {
 
   // Assert questions on the next page (page 1).
   assertCurrentPageQuestions(1);
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

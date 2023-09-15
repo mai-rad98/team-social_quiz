@@ -1,47 +1,119 @@
+.quiz-container {
+  width: 90%;
+}
+
 .question-container {
-    background-color: #78719b;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 60px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    margin: 20px auto;
-    align-items: flex-start;
-  }
-  
-  .question-text {
-    margin-bottom: 10px;
-    margin-bottom: 5px;
-  }
-  .option-list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .options-list ul {
-    list-style: none;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  
-  .option-list button {
-    margin-left: 20px;
-  }
-  
-  .label {
-    display: flex;
-    align-items: center;
-  }
-  
-  input[type='radio'] {
-    margin-right: 10px;
-  }
-  .labels {
-    display: flex;
-    align-items: center;
-  }
-  
-  
+  background-color: #5a95ad;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 60px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  align-items: flex-start;
+}
+
+.question-text {
+  margin-bottom: 10px;
+  margin-bottom: 5px;
+}
+.option-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.options-list ul {
+  list-style: none;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.option-list button {
+  margin-left: 20px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+}
+
+input[type='radio'] {
+  margin-right: 10px;
+}
+.labels {
+  display: flex;
+  align-items: center;
+}
+/* CSS for button container */
+.button-container {
+  margin: 0 auto;
+  display: block;
+}
+
+/* CSS for individual buttons */
+.navigation-buttons,
+.navigation-button1 {
+  background-color: #5a95ad;
+  width: 100px;
+  height: 40px;
+}
+.navigation-button1 {
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+.reset {
+  background-color: #5a95ad;
+  width: 100px;
+  height: 40px;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 2px solid #333;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.popup button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 2px solid #333;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.popup button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
+}

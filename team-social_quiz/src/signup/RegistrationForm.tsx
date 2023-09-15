@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
   username: string;
@@ -8,11 +8,10 @@ interface FormData {
   password: string;
 }
 
-
 const initialFormData: FormData = {
   username: '',
   fullName: '',
-  password: '',
+  password: ''
 };
 
 const RegistrationForm: React.FC = () => {
@@ -20,27 +19,23 @@ const RegistrationForm: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState<boolean>(true);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  const navigate =useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
-
- 
 
   const handleLogin = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const storedData: FormData = JSON.parse(storedUser);
-      if (
-        storedData.username === formData.username &&
-        storedData.password === formData.password
-      ) {
+      if (storedData.username === formData.username && storedData.password === formData.password) {
         setIsLoggedIn(true);
+        navigate('/dashboard');
       } else {
         alert('Invalid username or password');
       }
@@ -51,12 +46,14 @@ const RegistrationForm: React.FC = () => {
   const handleRegistration = () => {
     // Store user data in local storage or send it to your server
     localStorage.setItem('user', JSON.stringify(formData));
-    setIsLoggedIn(true);
-    
-    handleLogin();
-   // Redirect to the dashboard page
-  navigate('/dashboard');
+    //setIsLoggedIn(true);
 
+    //handleLogin();
+    // Redirect to the dashboard page
+    //navigate('/dashboard');
+    alert('Registration successful. You can now log in.');
+    setFormData(initialFormData);
+    setIsRegistering(false);
   };
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -67,7 +64,7 @@ const RegistrationForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (isLoggedIn) {
       // If the user is logged in, handle logout
       handleLogout();
@@ -77,10 +74,14 @@ const RegistrationForm: React.FC = () => {
     } else {
       // If on login form, attempt login
       handleLogin();
+      //navigate('/dashboard');
+      // Redirect to the dashboard page after successful login
+      if (isLoggedIn) {
+        //navigate('/dashboard');
+      }
     }
-  
+
     console.log('Form submitted with data:', formData);
-    // Redirect to the dashboard page after successful registration, login, or logout
   };
 
   return (
@@ -126,10 +127,8 @@ const RegistrationForm: React.FC = () => {
           {isLoggedIn ? 'Logout' : isRegistering ? 'Register' : 'Login'}
         </button>
         <button type="button" onClick={() => setIsRegistering(!isRegistering)}>
-          {isRegistering ? 'Switch to Login' : 'Switch to Registration'}
+          {isRegistering ? 'Switch to Login' : 'Registration'}
         </button>
-
-
       </form>
     </div>
   );

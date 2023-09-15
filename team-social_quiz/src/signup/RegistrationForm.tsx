@@ -72,8 +72,6 @@ const RegistrationForm: React.FC = () => {
       handleLogin();
 
       // Redirect to the dashboard page after successful login
-      if (isLoggedIn) {
-      }
     }
 
     console.log('Form submitted with data:', formData);

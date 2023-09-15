@@ -8,7 +8,7 @@ interface Props {
   onAnswer: (answer: string) => void;
 }
 
-const Question: React.FC<Props> = ({ question, options, answer, onAnswer }) => {
+const Question: React.FC<Props> = ({ question, options, onAnswer }) => {
   return (
     <div className="question-container">
       <h2 className="question-text">{question}</h2>

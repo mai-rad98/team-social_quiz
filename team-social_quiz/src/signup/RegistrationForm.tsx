@@ -35,7 +35,7 @@ const RegistrationForm: React.FC = () => {
       const storedData: FormData = JSON.parse(storedUser);
       if (storedData.username === formData.username && storedData.password === formData.password) {
         setIsLoggedIn(true);
-        navigate('/dashboard');
+        navigate('/dashboard', { state: { username: storedData.username } });
       } else {
         alert('Invalid username or password');
       }

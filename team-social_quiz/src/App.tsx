@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import RegistrationForm from './signup/RegistrationForm';
 import Dashboard from './Dashboard/Dashboard';
+import GeneralQuestions from './Dashboard/GeneralQuestions';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RegistrationForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/generalQuestions" element={<GeneralQuestions />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,5 @@
 // Dashboard.tsx
 import React from 'react';
-import Quiz from '../quiz/Quiz';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dash.css';
 
@@ -16,7 +15,7 @@ const Dashboard: React.FC = () => {
     navigate('/generalQuestions');
   };
 
-  const { username } = location.state || {}; // Get the username from location.state
+  const { username } = location.state || {};
 
   return (
     <div>

@@ -91,6 +91,7 @@ const RegistrationForm: React.FC = () => {
               value={formData.fullName}
               onChange={handleChange}
               required
+              pattern="[A-Za-z0-9_]+"
             />
           </div>
         )}
@@ -103,6 +104,7 @@ const RegistrationForm: React.FC = () => {
             value={formData.username}
             onChange={handleChange}
             required
+            pattern="[A-Za-z]+"
           />
         </div>
         <div>
@@ -114,6 +116,7 @@ const RegistrationForm: React.FC = () => {
             value={formData.password}
             onChange={handleChange}
             required
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
           />
         </div>
         <button type="submit">

@@ -5,7 +5,7 @@ jobs:
       - image: cimg/node:20.5.0
     environment:
       VERCEL_ORG_ID: hHhM2D6oaap2qlodJmDS1RQ4
-      VERCEL_PROJECT_ID: prj_tho0vYpWBdumFyeDlkWnpA7M260g
+      VERCEL_PROJECT_ID: prj_zW8uMCQz4mfdeoxJkERBESb0k3y8
     steps:
       - checkout
       - run:
@@ -25,7 +25,7 @@ jobs:
       - image: cimg/node:20.5.0
     environment:
       VERCEL_ORG_ID: hHhM2D6oaap2qlodJmDS1RQ4
-      VERCEL_PROJECT_ID: prj_tho0vYpWBdumFyeDlkWnpA7M260g
+      VERCEL_PROJECT_ID: prj_zW8uMCQz4mfdeoxJkERBESb0k3y8
     steps:
       - checkout
       - run:

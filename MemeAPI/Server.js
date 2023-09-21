@@ -1,9 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 const app = express();
 const port = 8080;
+
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 // Serve static files from the 'images' folder
 app.use('/images', express.static(__dirname + '/images'));
@@ -28,7 +31,7 @@ app.get('/scrape', async (req, res) => {
     await page.type('#search-form-input', searchQuery);
     await page.keyboard.press('Enter');
 
-    // Wait for the results to load (you might need to adjust the selector and timing)
+    // Wait for the results to load
     await page.waitForNavigation({ timeout: 190000 });
     await page.waitForSelector('.gallery-memes-container', { timeout: 190000 });
 

@@ -1,19 +1,27 @@
 import Question from './Question';
 import quizData from './quizData';
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Quiz.css';
 
 const BATCH_SIZE = 5;
 
+type ApiResponse = {
+  imageUrl: any;
+  imagePath: string;
+};
 const Quiz: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [hasWon, setHasWon] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [scrapedImageUrl, setScrapedImageUrl] = useState('');
+
+  const imageUrl = scrapedImageUrl;
 
   const handleAnswer = (answer: string) => {
-    const correctAnswer = quizData[currentQuestion].correctAnswer.toLowerCase(); // Convert to lowercase
-    const selectedAnswer = answer.toLowerCase(); // Convert to lowercase
+    const correctAnswer = quizData[currentQuestion].correctAnswer.toLowerCase();
+    const selectedAnswer = answer.toLowerCase();
 
     console.log('Selected Answer:', selectedAnswer);
     console.log('Correct Answer:', correctAnswer);
@@ -33,7 +41,17 @@ const Quiz: React.FC = () => {
       }
     } else {
       if (score === 9) {
-        setHasWon(true);
+        axios
+          .get<ApiResponse>('http://localhost:8080/scrape')
+          .then((response) => {
+            const { imageUrl } = response.data;
+            setScrapedImageUrl(imageUrl);
+            setHasWon(true);
+            console.log('imageurl : ', response.data);
+          })
+          .catch((error) => {
+            console.error('Error calling the API:', error);
+          });
       } else {
         alert(`Quiz finished. You scored ${score}/${quizData.length}`);
       }
@@ -87,6 +105,7 @@ const Quiz: React.FC = () => {
       {hasWon && (
         <div className="popup">
           <h2>Congratulations! You won the game!</h2>
+          <img src={imageUrl} alt="Scraped Meme" />
           <button onClick={resetGame}>Play Again</button>
         </div>
       )}

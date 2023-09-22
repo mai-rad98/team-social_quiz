@@ -24,7 +24,7 @@ const Sections: React.FC = () => {
               7 Questions
             </button>
             <button className="card-button" onClick={navigateToGeneralQuestions}>
-              Click Me
+              Start Quiz
             </button>
           </div>
         </div>

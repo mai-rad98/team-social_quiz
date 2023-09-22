@@ -12,7 +12,6 @@ const GeneralQuestions: React.FC = () => {
   return (
     <div>
       <Quiz numQuestions={numQuestions ? parseInt(numQuestions, 10) : 0} />
-
       <button className="log-out" onClick={navigateToDasboard}>
         Dashboard
       </button>

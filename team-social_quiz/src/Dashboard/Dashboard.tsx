@@ -19,8 +19,7 @@ const Dashboard: React.FC = () => {
       <h2 className="welcome-message">Welcome, {username}!</h2>
       {/* Display the username */}
       <Sections />
-      <p></p>
-      <p></p>
+
       <button className="log-out" onClick={handleLogout}>
         Logout
       </button>

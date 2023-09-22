@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import shuffle from 'lodash/shuffle'; // Import a shuffle function for randomizing questions
+import shuffle from 'lodash/shuffle';
 import axios from 'axios';
 
 import './Quiz.css';
@@ -63,13 +63,14 @@ const Quiz: React.FC<Props> = ({ numQuestions }) => {
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      if (score === questions.length) {
+      if (score === questions.length - 1) {
         axios
           .get<ApiResponse>('http://localhost:8080/scrape')
           .then((response) => {
             const { imageUrl } = response.data;
             setScrapedImageUrl(imageUrl);
             setHasWon(true);
+            console.log('imageurl', response.data);
           })
           .catch((error) => {
             console.error('Error calling the API:', error);

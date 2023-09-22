@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 const Sections: React.FC = () => {
   const navigate = useNavigate();
+  //default to 5 questions if the user did not select number of questions
   const [selectedNumQuestions, setSelectedNumQuestions] = useState(5);
 
   const navigateToGeneralQuestions = () => {
@@ -12,12 +13,10 @@ const Sections: React.FC = () => {
 
   return (
     <div>
-      <h2>Select section</h2>
       <div className="cards-container">
         <div className="card1">
-          <div className="card-title">General Questions</div>
+          <div className="card-title">Select No of Questions</div>
           <div className="card-content">
-            <h2>Select the number of questions:</h2>
             <button className="card-button" onClick={() => setSelectedNumQuestions(5)}>
               5 Questions
             </button>

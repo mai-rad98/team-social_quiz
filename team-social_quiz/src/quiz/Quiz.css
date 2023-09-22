@@ -140,6 +140,9 @@ input[type='radio'] {
   font-size: 18px;
   font-weight: bold;
 }
+.option-list {
+  color: white;
+}
 
 /* Style options list */
 .options {

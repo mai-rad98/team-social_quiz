@@ -5,6 +5,7 @@ interface Props {
   question: string;
   options: string[];
   answer: string;
+  categoty: string;
   onAnswer: (answer: string) => void;
 }
 

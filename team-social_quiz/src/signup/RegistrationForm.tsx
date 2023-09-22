@@ -44,7 +44,7 @@ const RegistrationForm: React.FC = () => {
     }
   };
   const handleRegistration = () => {
-    // Store user data in local storage or send it to your server
+    // Store user data in local storage
     localStorage.setItem('user', JSON.stringify(formData));
 
     alert('Registration successful. You can now log in.');
@@ -70,8 +70,6 @@ const RegistrationForm: React.FC = () => {
     } else {
       // If on login form, attempt login
       handleLogin();
-
-      // Redirect to the dashboard page after successful login
     }
 
     console.log('Form submitted with data:', formData);

@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.198",
     "react-scripts": "^5.0.1"
   }
 }

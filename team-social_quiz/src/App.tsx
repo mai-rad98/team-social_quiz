@@ -24,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RegistrationForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/generalQuestions/:numQuestions" element={<GeneralQuestions />} />
         <Route path="/generalQuestions" element={<GeneralQuestions />} />
       </Routes>
     </div>

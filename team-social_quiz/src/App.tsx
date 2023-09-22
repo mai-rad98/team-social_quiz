@@ -2,11 +2,18 @@ import React from 'react';
 import './App.css';
 import RegistrationForm from './signup/RegistrationForm';
 import Dashboard from './Dashboard/Dashboard';
+import GeneralQuestions from './Dashboard/GeneralQuestions';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
+      <Routes>
+        <Route path="/" element={<RegistrationForm />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/generalQuestions/:numQuestions" element={<GeneralQuestions />} />
+        <Route path="/generalQuestions" element={<GeneralQuestions />} />
+      </Routes>
       <div id="background-wrap">
         <div className="bubble x1"></div>
         <div className="bubble x2"></div>
@@ -19,11 +26,6 @@ function App() {
         <div className="bubble x9"></div>
         <div className="bubble x10"></div>
       </div>
-
-      <Routes>
-        <Route path="/" element={<RegistrationForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
     </div>
   );
 }

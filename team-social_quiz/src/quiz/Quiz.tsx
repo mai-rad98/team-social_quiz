@@ -1,50 +1,91 @@
+import React, { useState, useEffect } from 'react';
+import shuffle from 'lodash/shuffle';
+import axios from 'axios';
+
+import './Quiz.css';
 import Question from './Question';
 import quizData from './quizData';
-import React, { useState } from 'react';
-import './Quiz.css';
 
-const BATCH_SIZE = 5;
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+interface Question {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  category: string;
+}
 
-const Quiz: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+interface ApiResponse {
+  imageUrl: string;
+  imagePath: string;
+}
+
+interface Props {
+  numQuestions: number;
+}
+
+const Quiz: React.FC<Props> = ({ numQuestions }) => {
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [score, setScore] = useState(0);
   const [hasWon, setHasWon] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [scrapedImageUrl, setScrapedImageUrl] = useState('');
+
+  const imageUrl = scrapedImageUrl;
+
+  const selectQuestionsForGame = () => {
+    const moviesQuestions = quizData.filter((q) => q.category === 'Movies') as Question[];
+    const countriesQuestions = quizData.filter((q) => q.category === 'Countries') as Question[];
+    const trueFalseQuestions = quizData.filter((q) => q.category === 'True or False') as Question[];
+
+    const selectedQuestions = shuffle([
+      ...moviesQuestions,
+      ...countriesQuestions,
+      ...trueFalseQuestions
+    ]).slice(0, numQuestions);
+
+    setQuestions(selectedQuestions);
+  };
+
+  useEffect(() => {
+    selectQuestionsForGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numQuestions]);
 
   const handleAnswer = (answer: string) => {
-    const correctAnswer = quizData[currentQuestion].correctAnswer.toLowerCase(); // Convert to lowercase
-    const selectedAnswer = answer.toLowerCase(); // Convert to lowercase
-
-    console.log('Selected Answer:', selectedAnswer);
-    console.log('Correct Answer:', correctAnswer);
+    const correctAnswer = questions[currentQuestion].correctAnswer.toLowerCase();
+    const selectedAnswer = answer.toLowerCase();
 
     if (selectedAnswer === correctAnswer) {
-      console.log('Answer is correct!');
       setScore(score + 1);
-    } else {
-      console.log('Answer is incorrect.');
     }
 
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < quizData.length) {
+    if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
-      if (currentPage < Math.floor(nextQuestion / BATCH_SIZE)) {
-        setCurrentPage(currentPage + 1);
-      }
     } else {
-      if (score === 9) {
-        setHasWon(true);
+      if (score === questions.length - 1) {
+        axios
+          .get<ApiResponse>('http://localhost:8080/scrape')
+          .then((response) => {
+            const { imageUrl } = response.data;
+            setScrapedImageUrl(imageUrl);
+            setHasWon(true);
+            console.log('imageurl', response.data);
+          })
+          .catch((error) => {
+            console.error('Error calling the API:', error);
+          });
       } else {
-        alert(`Quiz finished. You scored ${score}/${quizData.length}`);
+        alert(`Quiz finished. You scored ${score}/${questions.length}`);
       }
     }
   };
 
   const resetGame = () => {
-    setCurrentPage(0);
     setCurrentQuestion(0);
     setScore(0);
     setHasWon(false);
+    selectQuestionsForGame();
   };
 
   return (
@@ -56,44 +97,25 @@ const Quiz: React.FC = () => {
         </button>
       </div>
       <div className="question-container">
-        {quizData
-          .slice(currentPage * BATCH_SIZE, (currentPage + 1) * BATCH_SIZE)
-          .map((question, index) => (
-            <Question
-              key={index}
-              question={question.question}
-              options={question.options}
-              answer={question.correctAnswer}
-              onAnswer={handleAnswer}
-            />
-          ))}
+        {questions.map((question, index) => (
+          <Question
+            key={index}
+            question={question.question}
+            options={shuffle([...question.options]).slice(0, 4)}
+            answer={question.correctAnswer}
+            onAnswer={handleAnswer}
+            categoty={question.category}
+          />
+        ))}
       </div>
-      <div className="button-container">
-        <button
-          className="navigation-buttons"
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 0}
-        >
-          Previous
-        </button>
-        <button
-          className="navigation-button1"
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={(currentPage + 1) * BATCH_SIZE >= quizData.length}
-        >
-          Next
-        </button>
-      </div>
+
       {hasWon && (
         <div className="popup">
           <h2>Congratulations! You won the game!</h2>
+          <img src={imageUrl} alt="Scraped Meme" />
           <button onClick={resetGame}>Play Again</button>
         </div>
       )}
-      {/*  <p className="score">
-        Score: {score}/{quizData.length}{' '}
-      </p> */}
-      <p></p>
     </div>
   );
 };

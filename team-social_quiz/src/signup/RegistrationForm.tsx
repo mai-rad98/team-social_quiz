@@ -35,7 +35,7 @@ const RegistrationForm: React.FC = () => {
       const storedData: FormData = JSON.parse(storedUser);
       if (storedData.username === formData.username && storedData.password === formData.password) {
         setIsLoggedIn(true);
-        navigate('/dashboard');
+        navigate('/dashboard', { state: { username: storedData.username } });
       } else {
         alert('Invalid username or password');
       }
@@ -44,7 +44,7 @@ const RegistrationForm: React.FC = () => {
     }
   };
   const handleRegistration = () => {
-    // Store user data in local storage or send it to your server
+    // Store user data in local storage
     localStorage.setItem('user', JSON.stringify(formData));
 
     alert('Registration successful. You can now log in.');
@@ -70,8 +70,6 @@ const RegistrationForm: React.FC = () => {
     } else {
       // If on login form, attempt login
       handleLogin();
-
-      // Redirect to the dashboard page after successful login
     }
 
     console.log('Form submitted with data:', formData);
@@ -91,6 +89,7 @@ const RegistrationForm: React.FC = () => {
               value={formData.fullName}
               onChange={handleChange}
               required
+              pattern="[A-Za-z0-9_]+"
             />
           </div>
         )}
@@ -103,6 +102,7 @@ const RegistrationForm: React.FC = () => {
             value={formData.username}
             onChange={handleChange}
             required
+            pattern="[A-Za-z]+"
           />
         </div>
         <div>
@@ -114,6 +114,7 @@ const RegistrationForm: React.FC = () => {
             value={formData.password}
             onChange={handleChange}
             required
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
           />
         </div>
         <button type="submit">

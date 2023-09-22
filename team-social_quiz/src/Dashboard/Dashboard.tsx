@@ -1,18 +1,25 @@
+// Dashboard.tsx
 import React from 'react';
-import Quiz from '../quiz/Quiz';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Dash.css';
+import Sections from './Sections';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     navigate('/');
   };
+
+  const { username } = location.state || {};
+
   return (
     <div>
-      <h2>Welcome, !</h2>
-      <Quiz />
+      <h2 className="welcome-message">Welcome, {username}!</h2>
+      {/* Display the username */}
+      <Sections />
+
       <button className="log-out" onClick={handleLogout}>
         Logout
       </button>

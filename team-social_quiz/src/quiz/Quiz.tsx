@@ -37,6 +37,7 @@ const Quiz: React.FC<Props> = ({ numQuestions }) => {
     const countriesQuestions = quizData.filter((q) => q.category === 'Countries') as Question[];
     const trueFalseQuestions = quizData.filter((q) => q.category === 'True or False') as Question[];
 
+    // Combine questions from different categories, shuffle them, and select a subset
     const selectedQuestions = shuffle([
       ...moviesQuestions,
       ...countriesQuestions,
@@ -104,7 +105,7 @@ const Quiz: React.FC<Props> = ({ numQuestions }) => {
             options={shuffle([...question.options]).slice(0, 4)}
             answer={question.correctAnswer}
             onAnswer={handleAnswer}
-            categoty={question.category}
+            category={question.category}
           />
         ))}
       </div>
@@ -112,8 +113,14 @@ const Quiz: React.FC<Props> = ({ numQuestions }) => {
       {hasWon && (
         <div className="popup">
           <h2>Congratulations! You won the game!</h2>
-          <img src={imageUrl} alt="Scraped Meme" />
-          <button onClick={resetGame}>Play Again</button>
+          <p>
+            Your score: {score}/{questions.length}
+          </p>
+          <br />
+          <img src={imageUrl} alt="Scraped Meme" style={{ width: '400px', height: 'auto' }} />
+          <button onClick={resetGame} style={{ marginTop: '10px' }}>
+            Play Again
+          </button>
         </div>
       )}
     </div>

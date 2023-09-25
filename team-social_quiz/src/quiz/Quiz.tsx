@@ -113,8 +113,14 @@ const Quiz: React.FC<Props> = ({ numQuestions }) => {
       {hasWon && (
         <div className="popup">
           <h2>Congratulations! You won the game!</h2>
-          <img src={imageUrl} alt="Scraped Meme" />
-          <button onClick={resetGame}>Play Again</button>
+          <p>
+            Your score: {score}/{questions.length}
+          </p>
+          <br />
+          <img src={imageUrl} alt="Scraped Meme" style={{ width: '400px', height: 'auto' }} />
+          <button onClick={resetGame} style={{ marginTop: '10px' }}>
+            Play Again
+          </button>
         </div>
       )}
     </div>

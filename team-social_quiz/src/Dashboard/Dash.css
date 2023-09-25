@@ -1,7 +1,9 @@
 .log-out {
-  background-color: #5a95ad;
-  width: 100px;
-  height: 40px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 .card1 {
   width: 300px;
@@ -12,40 +14,17 @@
   padding: 20px;
 }
 
-/* CSS for the card title */
 .card-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* CSS for the card content */
 .card-content {
   font-size: 16px;
   color: #333;
 }
-.card2 {
-  width: 300px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  padding: 20px;
-}
 
-.card3 {
-  width: 300px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  padding: 20px;
-}
-.cards-container {
-  flex-direction: row;
-}
-
-/* CSS for the card button */
 .card-button {
   background-color: #5a95ad;
   color: #fff;
@@ -54,7 +33,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  margin-top: 10px; /* Adjust margin as needed */
+  margin-top: 10px;
 }
 
 .card-button:hover {
@@ -62,11 +41,11 @@
 }
 
 .welcome-message {
-  font-size: 24px; /* Adjust the font size as needed */
+  font-size: 24px;
   font-weight: bold;
-  color: #333; /* Text color */
-  background-color: #f0f0f0; /* Background color */
-  padding: 30px 20px; /* Padding around the text */
-  border-radius: 8px; /* Border radius for rounded corners */
-  text-align: center; /* Center-align the text */
+  color: #333;
+  background-color: #f0f0f0;
+  padding: 30px 20px;
+  border-radius: 8px;
+  text-align: center;
 }
